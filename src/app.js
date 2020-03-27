@@ -24,8 +24,9 @@ $(document).ready(function(){
             for(var i in latestNews){
                 output +=`<div class="col l3  m6 s20">
                             <div class="card medium hoverable">
+                            <div class="card-content">
                             <a href="${latestNews[i].url}" class="article-link">
-                                <div class="card-content">
+                                
                                         <div class="card-image">
                                             <img src="${latestNews[i].urlToImage}" alt="img" class="responsive-img">
                                         </div>
