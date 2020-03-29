@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-    let url = "http://newsapi.org/v2/everything?q=bitcoin&from=2020-02-27&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093"
+    let url = "http://newsapi.org/v2/everything?q=bitcoin&from=2020-02-29&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093"
 
     $.ajax({
         url:url,
@@ -59,7 +59,7 @@ $(document).ready(function(){
             let output= "";
              e.preventDefault();
              let srch = $("#search").val();
-             let url = "http://newsapi.org/v2/everything?q="+srch+"&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
+             let url = "http://newsapi.org/v2/everything?q="+srch+"&from=2020-02-29&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
              if( srch !== ""){ 
              $.ajax({
                        url:url,
