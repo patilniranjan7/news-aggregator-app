@@ -1,100 +1,116 @@
-import '../styles/index.scss';
 
+$(document).ready(function(){
 
-var inputTxt = document.getElementById("search");
-inputTxt.addEventListener("keypress",searchValue);
-function searchValue(e){
-     var searchText = document.getElementById("search").value;
-     console.log(searchText);  
-     if(e.which==13){
-        if(searchText!='')
+    let url = "http://newsapi.org/v2/everything?q=bitcoin&from=2020-02-29&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093"
+
+    $.ajax({
+        url:url,
+        method:"GET",
+        datatype:"Json",
+
+        beforeSent:function()
         {
-            var searchUrl = `everything?q=${searchText}`;
-            beforeLoad();
-            fetchNews(searchUrl);
-        }   
-        else{
-            beforeLoad();
-            fetchNews("top-headlines?country=in");
-        }
-    }   
-}
+            $("#loader").show();
+        },
 
-             document.getElementById("toggler").addEventListener("click",toogleColor);
-            function toogleColor(){
-                var bodyColor = document.body;
-                bodyColor.classList.toggle("dark-mode");
-
-                var btnText = document.getElementById("toggler");
-                if(btnText.innerHTML === "Dark Mode")  
-                {
-                    btnText.innerHTML="Light Mode";
-                }
-                else{
-                    btnText.innerHTML="Dark Mode";
-                }
-                
-                
+        complete:function()
+        {
+            $("#loader").hide();
+        },
+        success:function(news){
+            let output= "<br>";
+            let latestNews = news.articles;
+          //  console.log(latestNews[0].title);
+            for(var i in latestNews){
+                output +=`<div class="col l3  m6 s20">
+                            <div class="card medium hoverable">
+                            <div class="card-content">
+                            <a href="${latestNews[i].url}" class="article-link">
+                                
+                                        <div class="card-image">
+                                            <img src="${latestNews[i].urlToImage}" alt="img" class="responsive-img">
+                                        </div>
+                                        <img class="article-img">
+                                        <h2 class="article-title">
+                                        <h6 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h6>
+                                        <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
+                                </div>
+                            </a>
+              </div>
+                               
+                  </div>`;
+            }
+          // document.getElementById("")
+            if(output !== ""){
+                $("#newsResults").html(output);
             }
 
+        },
+        error:function(){
+            $("#newsResults").html("some error occured");
+        }
+    });
 
-async function fetchNews(searchUrl){
-    const res = await fetch(`http://newsapi.org/v2/everything?q=bitcoin&from=2020-02-22&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093`);
-    const data = await res.json();
-    console.log(data);
-    if(data.totalResults>0){
-       var output= '';
-        
-        data.articles.forEach(i => {
-            output += `<li class="article">
-                            <img src=${i.urlToImage} alt=${i.source.name} style="width:100%;margin-top:5px;" class="article-img">
-                            
-                                <h2 class="article-title"><b>${i.title}</b></h2> 
-                                <p class="article-description">${i.description}</p> 
-                                <span class="article-author">`;
-                                if((i.author)!=null){
-                                    output+=`- ${i.author}</span>`;
-                                }
-                                else{
-                                    output+=`-N.A</span>`;
-                                }
-                                
-                    output += `<br> <a href=${i.url} class="article-link" target='_blank'><em>Read More At: ${i.source.name}</em></a>
-            
-                    </li>`;
-        });
-        output += '';
-
-        document.getElementById("news-articles").innerHTML=output;
-    } 
     
-    else if(data.totalResults===0){
-       var invalidData=document.getElementById("news-section");
-       invalidData.innerHTML="<h3>No article was found based on the search.</h3>";
-       invalidData.style.color="red";
-       invalidData.classList.add("not-found");
-    }   
-}
-fetchNews("top-headlines?country=in"); //by default it fetch news related to india
+    //let srch = $("#search").val();
+    $("#search").on("keyup",function(e){
+        if (event.keyCode === 13){
+            console.log("click");
+            let output= "";
+             e.preventDefault();
+             let srch = $("#search").val();
+             let url = "http://newsapi.org/v2/everything?q="+srch+"&from=2020-02-29&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
+             if( srch !== ""){ 
+             $.ajax({
+                       url:url,
+                       method:"GET",
+                       datatype:"json",  
+                       beforeSent:function()
+                       {
+                           $("#loader").show();
+                       },
+               
+                       complete:function()
+                       {
+                           $("#loader").hide();
+                       },
+                       success:function(news){
+                                    let latestNews = news.articles;
+                                      for(var i in latestNews){
+                                        output +=`<div class="col l3  m6 s20">
+                            
+                                                  <div class="card medium hoverable">
+                                                  <a href="${latestNews[i].url}" class="article-link">
+                                                        <div class="card-content">
+                                                                <div class="card-image">
+                                                                    <img src="${latestNews[i].urlToImage}" alt="img" class="responsive-img">
+                                                                </div>
+                                                                <img class="article-img">
+                                                                <h2 class="article-title">
+                                                                <h6 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h6>
+                                                                <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                       
+                                          </div>`;
+                                    }
+                             
+                                    if(output !== ""){
+                                        $("#newsResults").html(output);
+                                    }
+                                    else{
+                                        output="No article was found based on the search.";
+                                        $("#newsResults").html(output);
+                                    }
+                       }
 
-//Take to top functionality
+               });
 
-var mybutton = document.getElementById("myBtn");
-
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction();};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-
-document.getElementById("myBtn").addEventListener("click",topFunction);
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
+            }
+                 else{
+                console.log("please enter something");
+               }
+            }   
+     });
+});   
