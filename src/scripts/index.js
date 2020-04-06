@@ -81,7 +81,7 @@ $(document).ready(function(){
                             
                                                   <div class="card medium hoverable">
                                                   <a href="${latestNews[i].url}" class="article-link">
-                                                        <div class="card-content">
+                                                        <div class="card-content" id="news-articles">
                                                                 <div class="card-image">
                                                                     <img src="${latestNews[i].urlToImage}" alt="img" class="responsive-img">
                                                                 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){
                                     }
                                     else{
                                         output="No article was found based on the search.";
-                                        $("#newsResults").html(output);
+                                        $(".not-found").html(output);
                                     }
                        }
 
