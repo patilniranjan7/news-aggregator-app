@@ -1,28 +1,26 @@
+import "../styles/style.scss";
+$(document).ready(function () {
+  let url =
+    "http://newsapi.org/v2/everything?q=bitcoin&from=2020-03-06&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
 
-$(document).ready(function(){
+  $.ajax({
+    url: url,
+    method: "GET",
+    datatype: "Json",
 
-    let url = "http://newsapi.org/v2/everything?q=bitcoin&from=2020-03-06&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093"
+    beforeSent: function () {
+      $("#loader").show();
+    },
 
-    $.ajax({
-        url:url,
-        method:"GET",
-        datatype:"Json",
-
-        beforeSent:function()
-        {
-            $("#loader").show();
-        },
-
-        complete:function()
-        {
-            $("#loader").hide();
-        },
-        success:function(news){
-            let output= "<br>";
-            let latestNews = news.articles;
-          //  console.log(latestNews[0].title);
-            for(var i in latestNews){
-                output +=`
+    complete: function () {
+      $("#loader").hide();
+    },
+    success: function (news) {
+      let output = "<br>";
+      let latestNews = news.articles;
+      //  console.log(latestNews[0].title);
+      for (var i in latestNews) {
+        output += `
                 <div class="col l3  m6 s20">
                     <div class="card medium hoverable">
                         <div class="card-content">
@@ -40,45 +38,44 @@ $(document).ready(function(){
                   </div>
                                
                  </div>`;
-            }//class="responsive-img"
-          // document.getElementById("")
-            if(output !== ""){
-                $("#newsResults").html(output);
-            }
+      } //class="responsive-img"
+      // document.getElementById("")
+      if (output !== "") {
+        $("#newsResults").html(output);
+      }
+    },
+    error: function () {
+      $("#newsResults").html("some error occured");
+    },
+  });
 
-        },
-        error:function(){
-            $("#newsResults").html("some error occured");
-        }
-    });
+  //let srch = $("#search").val();
+  $("#search").on("keyup", function (e) {
+    if (event.keyCode === 13) {
+      console.log("click");
+      let output = "";
+      e.preventDefault();
+      let srch = $("#search").val();
+      let url =
+        "http://newsapi.org/v2/everything?q=" +
+        srch +
+        "&from=2020-03-06&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
+      if (srch !== "") {
+        $.ajax({
+          url: url,
+          method: "GET",
+          datatype: "json",
+          beforeSent: function () {
+            $("#loader").show();
+          },
 
-    
-    //let srch = $("#search").val();
-    $("#search").on("keyup",function(e){
-        if (event.keyCode === 13){
-            console.log("click");
-            let output= "";
-             e.preventDefault();
-             let srch = $("#search").val();
-             let url = "http://newsapi.org/v2/everything?q="+srch+"&from=2020-03-06&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
-             if( srch !== ""){ 
-             $.ajax({
-                       url:url,
-                       method:"GET",
-                       datatype:"json",  
-                       beforeSent:function()
-                       {
-                           $("#loader").show();
-                       },
-               
-                       complete:function()
-                       {
-                           $("#loader").hide();
-                       },
-                       success:function(news){
-                                    let latestNews = news.articles;
-                                      for(var i in latestNews){
-                                        output +=`
+          complete: function () {
+            $("#loader").hide();
+          },
+          success: function (news) {
+            let latestNews = news.articles;
+            for (var i in latestNews) {
+              output += `
                                         <div class="col l3  m6 s20">
                                         <div class="card medium hoverable">
                                             <div class="card-content">
@@ -96,23 +93,19 @@ $(document).ready(function(){
                                       </div>
                                                    
                                      </div>`;
-                                    }
-                             
-                                    if(output !== ""){
-                                        $("#newsResults").html(output);
-                                    }
-                                    else{
-                                        output="No article was found based on the search.";
-                                        $("#newsResults").html(output);
-                                    }
-                       }
-
-               });
-
             }
-                 else{
-                console.log("please enter something");
-               }
-            }   
-     });
-});   
+
+            if (output !== "") {
+              $("#newsResults").html(output);
+            } else {
+              output = "No article was found based on the search.";
+              $("#newsResults").html(output);
+            }
+          },
+        });
+      } else {
+        console.log("please enter something");
+      }
+    }
+  });
+});
