@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-    let url = "http://newsapi.org/v2/everything?q=bitcoin&from=2020-03-05&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093"
+    let url = "http://newsapi.org/v2/everything?q=bitcoin&from=2020-03-06&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093"
 
     $.ajax({
         url:url,
@@ -59,7 +59,7 @@ $(document).ready(function(){
             let output= "";
              e.preventDefault();
              let srch = $("#search").val();
-             let url = "http://newsapi.org/v2/everything?q="+srch+"&from=2020-03-05&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
+             let url = "http://newsapi.org/v2/everything?q="+srch+"&from=2020-03-06&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
              if( srch !== ""){ 
              $.ajax({
                        url:url,
@@ -77,16 +77,16 @@ $(document).ready(function(){
                        success:function(news){
                                     let latestNews = news.articles;
                                       for(var i in latestNews){
-                                        output +=`<div class="col l3  m6 s20">
+                                        output +=`
+                                        <div class="col l3  m6 s20">
                             
                                                   <div class="card medium hoverable">
                                                   <a href="${latestNews[i].url}" class="article-link">
-                                                        <div class="card-content" id="news-articles">
+                                                        <div class="card-content">
                                                                 <div class="card-image">
                                                                     <img src="${latestNews[i].urlToImage}" alt="img" class="responsive-img">
                                                                 </div>
-                                                                <img class="article-img">
-                                                                <h2 class="article-title">
+                                                                
                                                                 <h6 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h6>
                                                                 <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
                                                         </div>
