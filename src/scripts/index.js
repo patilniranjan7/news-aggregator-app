@@ -83,11 +83,11 @@ $(document).ready(function(){
                                                   <div class="card medium hoverable">
                                                   <a href="${latestNews[i].url}" class="article-link">
                                                         <div class="card-content">
-                                                                <div class="card-image">
-                                                                    <img src="${latestNews[i].urlToImage}" alt="img" class="responsive-img">
+                                                                <div class="card-image" >
+                                                                    <img src="${latestNews[i].urlToImage}" alt="img" class="article-img" class="responsive-img">
                                                                 </div>
                                                                 
-                                                                <h6 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h6>
+                                                                <h2 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h2>
                                                                 <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
                                                         </div>
                                                     </a>
