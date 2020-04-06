@@ -101,7 +101,7 @@ $(document).ready(function(){
                                     }
                                     else{
                                         output="No article was found based on the search.";
-                                        $(".not-found").html(output);
+                                        $("#newsResults").html(output);
                                     }
                        }
 
