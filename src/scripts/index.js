@@ -22,24 +22,25 @@ $(document).ready(function(){
             let latestNews = news.articles;
           //  console.log(latestNews[0].title);
             for(var i in latestNews){
-                output +=`<div class="col l3  m6 s20">
-                            <div class="card medium hoverable">
-                            <div class="card-content">
+                output +=`
+                <div class="col l3  m6 s20">
+                    <div class="card medium hoverable">
+                        <div class="card-content">
                             <a href="${latestNews[i].url}" class="article-link">
                                 
                                         <div class="card-image">
-                                            <img src="${latestNews[i].urlToImage}" alt="img" class="responsive-img">
+                                            <img src="${latestNews[i].urlToImage}" alt="img" class="article-img" >
                                         </div>
-                                        <img class="article-img">
-                                        <h2 class="article-title">
-                                        <h6 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h6>
+                                      
+                                        <h2 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h2>
                                         <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
-                                </div>
-                            </a>
-              </div>
+                            </a>            
+                        </div>
+                            
+                  </div>
                                
-                  </div>`;
-            }
+                 </div>`;
+            }//class="responsive-img"
           // document.getElementById("")
             if(output !== ""){
                 $("#newsResults").html(output);
@@ -79,21 +80,22 @@ $(document).ready(function(){
                                       for(var i in latestNews){
                                         output +=`
                                         <div class="col l3  m6 s20">
-                            
-                                                  <div class="card medium hoverable">
-                                                  <a href="${latestNews[i].url}" class="article-link">
-                                                        <div class="card-content">
-                                                                <div class="card-image" >
-                                                                    <img src="${latestNews[i].urlToImage}" alt="img" class="article-img" class="responsive-img">
-                                                                </div>
-                                                                
-                                                                <h2 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h2>
-                                                                <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                       
-                                          </div>`;
+                                        <div class="card medium hoverable">
+                                            <div class="card-content">
+                                                <a href="${latestNews[i].url}" class="article-link">
+                                                    
+                                                            <div class="card-image">
+                                                                <img src="${latestNews[i].urlToImage}" alt="img" class="article-img" >
+                                                            </div>
+                                                          
+                                                            <h2 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h2>
+                                                            <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
+                                                </a>            
+                                            </div>
+                                                
+                                      </div>
+                                                   
+                                     </div>`;
                                     }
                              
                                     if(output !== ""){
