@@ -1,0 +1,14 @@
+
+body {
+  background-color: rgb(34, 30, 30);
+}
+.heading {
+  text-align: center;
+  padding: 25px;
+  color: white;
+  background-color: black;
+  border: 0.5px solid white;
+  width: fit-content;
+  margin: auto;
+  margin-top: 25px;
+}

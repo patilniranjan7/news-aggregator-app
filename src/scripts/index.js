@@ -1,156 +1,104 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-import "../styles/style.scss";
-$(document).ready(function () {
-  let url =
-    "http://newsapi.org/v2/everything?q=bitcoin&from=2020-03-08&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
-=======
->>>>>>> parent of 284823c... added prettier formatter and style.scss
-=======
->>>>>>> parent of 284823c... added prettier formatter and style.scss
+import "../styles/header.css";
+import "../styles/index.css";
+import "../styles/card.scss";
 
-$(document).ready(function(){
+const headlinesURL =
+  "http://newsapi.org/v2/top-headlines?country=in&apiKey=79e34a907fea407abf18357531170f5b";
 
-    let url = "http://newsapi.org/v2/everything?q=bitcoin&from=2020-03-06&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093"
+function getSearchURL(searchKey = "") {
+  return `https://newsapi.org/v2/everything?q=${searchKey}&apiKey=79e34a907fea407abf18357531170f5b`;
+}
 
-    $.ajax({
-        url:url,
-        method:"GET",
-        datatype:"Json",
+var ul = document.createElement("ul");
+ul.id = "news-articles";
+var news = document.querySelector("#news");
+news.appendChild(ul);
 
-        beforeSent:function()
-        {
-            $("#loader").show();
-        },
+async function getArticles(url) {
+  let response = await fetch(url);
+  let data = await response.json();
+  return data;
+}
 
-        complete:function()
-        {
-            $("#loader").hide();
-        },
-        success:function(news){
-            let output= "<br>";
-            let latestNews = news.articles;
-          //  console.log(latestNews[0].title);
-            for(var i in latestNews){
-                output +=`
-                <div class="col l3  m6 s20">
-                    <div class="card medium hoverable">
-                        <div class="card-content">
-                            <a href="${latestNews[i].url}" class="article-link">
-                                
-                                        <div class="card-image">
-                                            <img src="${latestNews[i].urlToImage}" alt="img" class="article-img" >
-                                        </div>
-                                      
-                                        <h2 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h2>
-                                        <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
-                            </a>            
-                        </div>
-                            
-                  </div>
-                               
-                 </div>`;
-            }//class="responsive-img"
-          // document.getElementById("")
-            if(output !== ""){
-                $("#newsResults").html(output);
-            }
+// Creating HTML Elements Dynamically
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  //let srch = $("#search").val();
-  $("#search").on("keyup", function (e) {
-    if (event.keyCode === 13) {
-      console.log("click");
-      let output = "";
-      e.preventDefault();
-      let srch = $("#search").val();
-      let url =
-        "http://newsapi.org/v2/everything?q=" +
-        srch +
-        "&from=2020-03-07&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
-      if (srch !== "") {
-        $.ajax({
-          url: url,
-          method: "GET",
-          datatype: "json",
-          beforeSent: function () {
-            $("#loader").show();
-          },
-=======
-=======
->>>>>>> parent of 284823c... added prettier formatter and style.scss
-        },
-        error:function(){
-            $("#newsResults").html("some error occured");
-        }
-    });
-<<<<<<< HEAD
->>>>>>> parent of 284823c... added prettier formatter and style.scss
-=======
->>>>>>> parent of 284823c... added prettier formatter and style.scss
+getArticles(headlinesURL).then(print);
+function print(data) {
+  console.log(data);
+  for (let i = 0; i < data.articles.length; i++) {
+    var li = document.createElement("li");
+    li.className = "article";
+    ul.appendChild(li);
+    var a = document.createElement("a");
+    a.setAttribute("href", data.articles[i].url);
+    a.className = "article-link";
+    li.appendChild(a);
+    var img = document.createElement("img");
+    img.className = "article-img responsive-img";
+    img.setAttribute("src", data.articles[i].urlToImage);
+    li.appendChild(img);
+    var h2 = document.createElement("h2");
+    h2.innerHTML = data.articles[i].title;
+    h2.className = "article-title";
+    li.appendChild(h2);
+    var p = document.createElement("p");
+    p.innerHTML = data.articles[i].description;
+    p.className = "article-description";
+    li.appendChild(p);
+    var span = document.createElement("span");
+    span.innerHTML = data.articles[i].author;
+    span.className = "article-author";
+    li.appendChild(span);
 
-    
-    //let srch = $("#search").val();
-    $("#search").on("keyup",function(e){
-        if (event.keyCode === 13){
-            console.log("click");
-            let output= "";
-             e.preventDefault();
-             let srch = $("#search").val();
-             let url = "http://newsapi.org/v2/everything?q="+srch+"&from=2020-03-06&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
-             if( srch !== ""){ 
-             $.ajax({
-                       url:url,
-                       method:"GET",
-                       datatype:"json",  
-                       beforeSent:function()
-                       {
-                           $("#loader").show();
-                       },
-               
-                       complete:function()
-                       {
-                           $("#loader").hide();
-                       },
-                       success:function(news){
-                                    let latestNews = news.articles;
-                                      for(var i in latestNews){
-                                        output +=`
-                                        <div class="col l3  m6 s20">
-                                        <div class="card medium hoverable">
-                                            <div class="card-content">
-                                                <a href="${latestNews[i].url}" class="article-link">
-                                                    
-                                                            <div class="card-image">
-                                                                <img src="${latestNews[i].urlToImage}" alt="img" class="article-img" >
-                                                            </div>
-                                                          
-                                                            <h2 class="article-title" style="color: black !important;" ><b>${latestNews[i].title}</b></h2>
-                                                            <p class="article-description" style="color: black !important;">${latestNews[i].description}--<span class="article-author" style="color: slateblue;">${latestNews[i].author}</span> </p>
-                                                </a>            
-                                            </div>
-                                                
-                                      </div>
-                                                   
-                                     </div>`;
-                                    }
-                             
-                                    if(output !== ""){
-                                        $("#newsResults").html(output);
-                                    }
-                                    else{
-                                        output="No article was found based on the search.";
-                                        $("#newsResults").html(output);
-                                    }
-                       }
+    li.addEventListener("click", liHandler);
 
-               });
+    // Adding Styles Dynamically
 
-            }
-                 else{
-                console.log("please enter something");
-               }
-            }   
-     });
-});   
+    li.style.cssText =
+      "width:290px;height:auto;  margin:15px;color:white; background-color:rgb(96,96,96);";
+    img.style.cssText = "width:250px;height:auto;margin:20px 0px 0px 20px;";
+    h2.style.cssText = "padding:10px 20px 10px 20px;";
+    p.style.cssText = "padding:0px 20px 10px 20px;";
+    span.style.cssText =
+      "float:right;padding:0px 20px 20px 0px; text-decoration:none; position:relative; bottom:0px; color:lightblue; font-weight:600;";
+    a.style.cssText =
+      "float:right;padding:0px 20px 20px 0px; text-decoration:none; position:relative; bottom:0px; color:white; font-weight:600;";
+  }
+  ul.style.cssText =
+    "list-Style:none;display:flex; flex-wrap:wrap;padding:20px;justify-content:center; ";
+}
+
+getArticles().then((data) => {
+  print(data);
+});
+
+function liHandler(event) {
+  debugger;
+  console.log(event);
+  const url = event.currentTarget.querySelector("a").href;
+  window.open(url);
+}
+
+function searchHandler(event) {
+  debugger;
+  console.log(event);
+  if (event.keyCode === 13) {
+    searchPrint(event.target.value);
+  }
+}
+var search = document.querySelector("#search");
+search.addEventListener("keyup", searchHandler);
+function searchPrint(searchKey) {
+  document.querySelector("#news-articles").innerHTML = "";
+
+  getArticles(getSearchURL(searchKey)).then((data) => {
+    if (data.articles.length < 1) {
+      var h1 = document.createElement("h1");
+      h1.className = "not-found";
+      h1.innerHTML = "No article was found based on the search.";
+      ul.appendChild(h1);
+    } else {
+      print(data);
+    }
+  });
+}

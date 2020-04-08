@@ -1,0 +1,36 @@
+
+.searchdiv {
+  text-align: center;
+  margin-top: 10px;
+}
+.searchdiv #search {
+  width: 90%;
+  margin: auto;
+  height: 40px;
+  border: 1px solid;
+  padding-left: 15px;
+  color: white;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+  background-color: grey;
+}
+.searchdiv #search:hover {
+  background-color: #eee;
+  color: black;
+}
+.article {
+  transition: all 0.5s ease-in;
+  opacity: 0.9;
+}
+.article:hover {
+  opacity: 1;
+  transform: scale(1.07);
+}
+::placeholder {
+  color: white;
+  opacity: 1;
+  font-weight: 600;
+}
