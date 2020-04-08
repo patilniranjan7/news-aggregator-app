@@ -1,8 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import "../styles/style.scss";
 $(document).ready(function () {
   let url =
     "http://newsapi.org/v2/everything?q=bitcoin&from=2020-03-08&sortBy=publishedAt&apiKey=51b087659f6443508d667a6e7182f093";
+=======
+>>>>>>> parent of 284823c... added prettier formatter and style.scss
 =======
 >>>>>>> parent of 284823c... added prettier formatter and style.scss
 
@@ -54,6 +57,7 @@ $(document).ready(function(){
             }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   //let srch = $("#search").val();
   $("#search").on("keyup", function (e) {
     if (event.keyCode === 13) {
@@ -74,11 +78,16 @@ $(document).ready(function(){
             $("#loader").show();
           },
 =======
+=======
+>>>>>>> parent of 284823c... added prettier formatter and style.scss
         },
         error:function(){
             $("#newsResults").html("some error occured");
         }
     });
+<<<<<<< HEAD
+>>>>>>> parent of 284823c... added prettier formatter and style.scss
+=======
 >>>>>>> parent of 284823c... added prettier formatter and style.scss
 
     
