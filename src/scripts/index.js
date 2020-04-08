@@ -1,6 +1,8 @@
 import "../styles/header.css";
 import "../styles/index.css";
+import "../styles/hover.css";
 import "../styles/card.scss";
+import "../styles/landing-effect.css";
 
 const headlinesURL =
   "http://newsapi.org/v2/top-headlines?country=in&apiKey=79e34a907fea407abf18357531170f5b";
@@ -27,7 +29,7 @@ function print(data) {
   console.log(data);
   for (let i = 0; i < data.articles.length; i++) {
     var li = document.createElement("li");
-    li.className = "article";
+    li.className = "article hvr-grow wow fadeInUPBig";
     ul.appendChild(li);
     var a = document.createElement("a");
     a.setAttribute("href", data.articles[i].url);
