@@ -29,14 +29,16 @@ function print(data) {
   console.log(data);
   for (let i = 0; i < data.articles.length; i++) {
     var li = document.createElement("li");
-    li.className = "article hvr-grow wow fadeInUPBig";
+    li.className = "article ";
+    //li.className = "hvr-grow wow fadeInUPBig";
     ul.appendChild(li);
     var a = document.createElement("a");
     a.setAttribute("href", data.articles[i].url);
     a.className = "article-link";
     li.appendChild(a);
     var img = document.createElement("img");
-    img.className = "article-img responsive-img";
+    img.className = "article-img";
+    //img.className = "responsive-img";
     img.setAttribute("src", data.articles[i].urlToImage);
     li.appendChild(img);
     var h2 = document.createElement("h2");
