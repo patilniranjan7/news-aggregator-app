@@ -29,7 +29,7 @@ function print(data) {
   console.log(data);
   for (let i = 0; i < data.articles.length; i++) {
     var li = document.createElement("li");
-    li.className = "article ";
+    li.className = "article";
     //li.className = "hvr-grow wow fadeInUPBig";
     ul.appendChild(li);
     var a = document.createElement("a");
