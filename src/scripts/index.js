@@ -5,10 +5,10 @@ import "../styles/card.scss";
 import "../styles/landing-effect.css";
 
 const headlinesURL =
-  "http://newsapi.org/v2/top-headlines?country=in&apiKey=79e34a907fea407abf18357531170f5b";
+  "http://newsapi.org/v2/top-headlines?country=in&apiKey=1b2d8b750cda476a85b28c1f49ca6abe";
 
 function getSearchURL(searchKey = "") {
-  return `https://newsapi.org/v2/everything?q=${searchKey}&apiKey=79e34a907fea407abf18357531170f5b`;
+  return `https://newsapi.org/v2/everything?q=${searchKey}&apiKey=1b2d8b750cda476a85b28c1f49ca6abe`;
 }
 
 var ul = document.createElement("ul");
